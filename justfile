@@ -1,6 +1,7 @@
 init:
   cargo install cargo-tarpaulin
   cargo install cargo-watch
+  cargo install cargo-expand
   rustup component add clippy
   rustup component add rustfmt
 
