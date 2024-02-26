@@ -1,7 +1,12 @@
+set export := true
+set dotenv-load := true
+set positional-arguments := true
+
 init:
   cargo install cargo-tarpaulin
   cargo install cargo-watch
   cargo install cargo-expand
+  cargo install sqlx-cli -F rustls,postgres
   rustup component add clippy
   rustup component add rustfmt
 
@@ -27,3 +32,58 @@ quality_checks: lint format_check audit
 
 collect_coverage:
   cargo tarpaulin --ignore-tests
+
+[private]
+db_container_start:
+  #!/usr/bin/env bash
+  set -x
+  set -eo pipefail
+
+  if ! [ -x "$(command -v psql)" ]; then
+    echo >&2 "Error: psql is not installed."
+    exit 1
+  fi
+
+  if [[ -z "${SKIP_DOCKER}" ]]
+  then
+    docker run \
+      -e POSTGRES_USER=${DB_USER} \
+      -e POSTGRES_PASSWORD=${DB_PASSWORD} \
+      -e POSTGRES_DB=${DB_NAME} \
+      -p "${DB_PORT}":5432 \
+      -d postgres \
+      postgres -N 1000
+  fi
+
+  # keep pinging postgres until it's ready to accept commands
+  export PGPASSWORD="${DB_PASSWORD}"
+  until psql -h "${DB_HOST}" -U "${DB_USER}" -p "${DB_PORT}" -d "postgres" -c '\q'; do
+    >&2 echo "Postgres is still unavailable - sleeping"
+    sleep 1
+  done
+
+  >&2 echo "Postgres is up and running on port ${DB_PORT}"
+
+[private]
+db_create:
+  #!/usr/bin/env bash
+  set -x
+  set -eo pipefail
+
+  if ! [ -x "$(command -v sqlx)" ]; then
+    echo >&2 "Error: sqlx is not installed."
+    exit 1
+  fi
+
+  sqlx database create
+  sqlx migrate run
+
+
+db_init: db_container_start db_create
+
+db_migrate *args='run':
+  sqlx migrate $@
+
+db *args:
+  sqlx $@
+
