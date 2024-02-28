@@ -1,4 +1,4 @@
-use crate::configuration::get_configuration;
+
 use crate::routes::{health_check, subscribe};
 use actix_web::dev::Server;
 use actix_web::middleware::Logger;

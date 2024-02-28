@@ -18,9 +18,17 @@ rustflags = ["-C", "linker=clang", "-C", "link-arg=-fuse-ld=lld"]
 actix-web = "4.5.1"
 chrono = { version = "0.4.34", features = ["clock"] }
 config = "0.14.0"
+env_logger = "0.11.2"
+log = "0.4.21"
+once_cell = "1.19.0"
+secrecy = { version = "0.8.0", features = ["serde"] }
 serde = { version = "1.0.197", features = ["derive"] }
 sqlx = { version = "0.7.3", features = ["runtime-tokio-rustls", "macros", "postgres", "uuid", "chrono", "migrate"] }
 tokio = { version = "1.36.0", features = ["macros", "rt-multi-thread"] }
+tracing = { version = "0.1.40", features = ["log"] }
+tracing-bunyan-formatter = "0.3.9"
+tracing-log = "0.2.0"
+tracing-subscriber = { version = "0.3.18", features = ["registry", "env-filter"] }
 uuid = { version = "1.7.0", features = ["v4"] }
 
 [dev-dependencies]
