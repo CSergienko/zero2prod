@@ -34,3 +34,4 @@ uuid = { version = "1.7.0", features = ["v4"] }
 
 [dev-dependencies]
 reqwest = "0.11.24"
+rusty-hook = "0.11.2"

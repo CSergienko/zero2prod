@@ -1,0 +1,6 @@
+[hooks]
+pre-commit = "just lint && just format_check"
+pre-push = "just test"
+
+[logging]
+verbose = true
