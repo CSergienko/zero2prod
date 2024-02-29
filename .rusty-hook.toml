@@ -1,5 +1,6 @@
 [hooks]
 pre-commit = "just lint && just format_check"
+post-commit = "git push"
 pre-push = "just test"
 
 [logging]
