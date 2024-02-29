@@ -1,5 +1,5 @@
 [hooks]
-pre-commit = "just lint && just format_check"
+pre-commit = "just quality_checks"
 pre-push = "just test"
 
 [logging]

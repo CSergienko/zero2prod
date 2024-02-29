@@ -135,8 +135,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install postgresql-client -y
       - name: Migrate database
         run: SKIP_DOCKER=true just db_init
-      - name: Linting
-        run: just lint
+      - name: Quality Checks
+        run: just quality_checks
 
   # `coverage` container job
   coverage:

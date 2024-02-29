@@ -29,7 +29,8 @@ format_check:
 audit:
   cargo audit
 
-quality_checks: lint format_check audit
+quality_checks: lint format_check
+  cargo sqlx prepare --workspace --check
 
 collect_coverage:
   cargo tarpaulin --ignore-tests
@@ -80,11 +81,17 @@ db_create:
   sqlx migrate run
 
 
-db_init: db_container_start db_create
+db_init: db_container_start db_create db_prepare
 
 db_migrate *args='run':
   sqlx migrate $@
+  just db_prepare
+
+db_prepare:
+  cargo sqlx prepare --workspace
 
 db *args:
   sqlx $@
 
+docker_build:
+  docker build --tag zero2prod --file Dockerfile .
