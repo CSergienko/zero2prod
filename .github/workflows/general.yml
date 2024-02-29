@@ -44,6 +44,9 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - uses: extractions/setup-just@v1
+        with:
+          just-version: 1.5.0
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         # The uses keyword specifies that this step will run v3 of the actions/checkout action.
@@ -77,23 +80,26 @@ jobs:
         run: sudo apt-get update && sudo apt-get install postgresql-client -y
 
       - name: Migrate database
-        run: SKIP_DOCKER=true ./scripts/init_db.sh
+        run: SKIP_DOCKER=true just db_init
 
       - name: Run tests
-        run: cargo test
+        run: just test
 
   # `fmt` container job
   fmt:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
+      - uses: extractions/setup-just@v1
+        with:
+          just-version: 1.5.0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
         with:
           # Specific to dtolnay/rust-toolchain: Comma-separated string of additional components to install
           components: rustfmt
       - name: Enforce formatting
-        run: cargo fmt --check
+        run: just format_check
 
   # `clippy` container job
   clippy:
@@ -109,6 +115,9 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - uses: extractions/setup-just@v1
+        with:
+          just-version: 1.5.0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -143,6 +152,9 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - uses: extractions/setup-just@v1
+        with:
+          just-version: 1.5.0
       - name: Checkout repository
         uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
