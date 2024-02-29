@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: extractions/setup-just@v1
         with:
-          just-version: 1.5.0
+          just-version: 1.23.0
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         # The uses keyword specifies that this step will run v3 of the actions/checkout action.
@@ -92,7 +92,7 @@ jobs:
     steps:
       - uses: extractions/setup-just@v1
         with:
-          just-version: 1.5.0
+          just-version: 1.23.0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -117,7 +117,7 @@ jobs:
     steps:
       - uses: extractions/setup-just@v1
         with:
-          just-version: 1.5.0
+          just-version: 1.23.0
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -154,7 +154,7 @@ jobs:
     steps:
       - uses: extractions/setup-just@v1
         with:
-          just-version: 1.5.0
+          just-version: 1.23.0
       - name: Checkout repository
         uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
