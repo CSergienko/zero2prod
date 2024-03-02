@@ -32,10 +32,9 @@ pub struct TestApp {
 
 async fn configure_database(config: &DatabaseSettings) -> PgPool {
     // Create database
-    let mut connection =
-        PgConnection::connect(&config.connection_string_without_db().expose_secret())
-            .await
-            .expect("Failed to connect to Postgres");
+    let mut connection = PgConnection::connect_with(&config.without_db())
+        .await
+        .expect("Failed to connect to Postgres");
 
     connection
         .execute(format!("CREATE DATABASE \"{}\";", config.database_name).as_str())
@@ -43,7 +42,7 @@ async fn configure_database(config: &DatabaseSettings) -> PgPool {
         .expect("Failed to create database");
 
     // Migrate database
-    let connection_pool = PgPool::connect(&config.connection_string().expose_secret())
+    let connection_pool = PgPool::connect_with(config.with_db())
         .await
         .expect("Failed to connect to Postgres");
 
