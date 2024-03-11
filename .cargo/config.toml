@@ -1,0 +1,5 @@
+[build]
+rustflags = ["-Clinker=clang", "-Ctarget-cpu=native", "-Clink-arg=-fuse-ld=lld"]
+
+[dev]
+rustflags = ["-Clinker=clang", "-Ctarget-cpu=native", "-Clink-arg=-fuse-ld=lld"]

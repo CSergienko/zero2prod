@@ -7,3 +7,7 @@ database:
   username: "postgres"
   password: "postgres"
   database_name: "newsletter"
+email_client:
+  base_url: "https://api.postkarkapp.com"
+  sender_email: "example@domain.tld"
+  authorization_token: "my-super-secret-token"
