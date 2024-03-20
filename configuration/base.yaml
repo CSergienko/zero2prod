@@ -11,3 +11,4 @@ email_client:
   base_url: "https://api.postkarkapp.com"
   sender_email: "example@domain.tld"
   authorization_token: "my-super-secret-token"
+  timeout_milliseconds: 10000
