@@ -95,3 +95,14 @@ db *args:
 
 docker_build:
   docker build --tag zero2prod --file Dockerfile .
+
+deploy_create:
+  doctl apps create --spec spec.yaml
+
+deploy_update:
+  doctl apps update $DROPLET_ID --spec spec.yaml
+
+deploy_NUKE:
+  doctl apps destroy $DROPLET_ID 
+  doctl apps delete $DROPLET_ID 
+
