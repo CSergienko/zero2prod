@@ -54,6 +54,7 @@ quickcheck_macros = "0.9.1"
 fake = "~2.3"
 wiremock = "0.6.0"
 serde_json = "1.0.114"
+linkify = "0.9"
 
 [profile.release]
 lto = true

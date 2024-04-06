@@ -3,6 +3,7 @@ set dotenv-load := true
 set positional-arguments := true
 
 init:
+  cargo install cargo-nextest
   cargo install cargo-tarpaulin
   cargo install cargo-watch
   cargo install cargo-expand
@@ -12,13 +13,13 @@ init:
   rustup component add rustfmt
 
 dev:
-  cargo watch -x clippy -x test -x run
+  cargo watch -x clippy -x "nextest run" -x run
 
 lint:
   cargo clippy
 
 test:
-  cargo test
+  cargo nextest run
 
 format:
   cargo fmt
