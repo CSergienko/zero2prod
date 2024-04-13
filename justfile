@@ -2,6 +2,9 @@ set export := true
 set dotenv-load := true
 set positional-arguments := true
 
+default:
+  just --choose
+
 init:
   cargo install cargo-nextest
   cargo install cargo-tarpaulin
