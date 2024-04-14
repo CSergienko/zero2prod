@@ -82,6 +82,10 @@ jobs:
       - name: Migrate database
         run: SKIP_DOCKER=true just db_init
 
+      - name: Install nextest
+        run:
+          cargo install cargo-nextest
+
       - name: Run tests
         run: just test
 
