@@ -16,13 +16,16 @@ init:
   rustup component add rustfmt
 
 dev:
-  cargo watch -x clippy -x "nextest run" -x run
+  cargo watch -x clippy -x test -x run
 
 lint:
   cargo clippy
 
 test:
   cargo nextest run
+
+test_watch:
+  cargo watch -x test
 
 format:
   cargo fmt
