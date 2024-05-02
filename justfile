@@ -16,7 +16,7 @@ init:
   rustup component add rustfmt
 
 dev:
-  cargo watch -x clippy -x test -x run
+  cargo watch -x clippy -x test -x run | bunyan
 
 lint:
   cargo clippy
