@@ -16,16 +16,16 @@ init:
   rustup component add rustfmt
 
 dev:
-  cargo watch -x clippy -x test -x run | bunyan
+  cargo watch -x clippy -x run | bunyan
 
 lint:
   cargo clippy
 
 test:
-  cargo nextest run
+  cargo test | bunyan
 
 test_watch:
-  cargo watch -x test
+  cargo watch -x test | bunyan
 
 format:
   cargo fmt
